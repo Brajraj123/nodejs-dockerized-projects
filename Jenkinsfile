@@ -44,12 +44,12 @@ pipeline {
         success {
             emailext body: 'Your pipeline was successful.',
                      subject: 'Pipeline Success Notification',
-                     to: 'ananda.yashaswi@quokkalabs.com'
+                     to: 'ananda.yashaswi@quokkalabs.com, brajrajsingh751@gmail.com'
         }
         failure {
             emailext body: 'Your pipeline failed.',
                      subject: 'Pipeline Failure Notification',
-                     to: 'ananda.yashaswi@quokkalabs.com'
+                     to: 'ananda.yashaswi@quokkalabs.com, brajrajsingh751@gmail.com'
         }
     }
 }
