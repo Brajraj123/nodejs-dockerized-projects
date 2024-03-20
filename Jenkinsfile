@@ -1,10 +1,12 @@
 pipeline {
     agent any
+
     tools {
         nodejs "NodeJS"
     }
+
     stages {
-        stage("checkout") {
+        stage("Checkout") {
             steps {
                 checkout scm
             }
@@ -22,7 +24,7 @@ pipeline {
             }
         }
 
-        stage("Build Image"){
+        stage("Build Image") {
             steps {
                 sh 'docker build -t my-node-app:1.0 .'
             }
@@ -30,7 +32,7 @@ pipeline {
 
         stage("Docker Push") {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]){
+                withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                     sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD'
                     sh 'docker tag my-node-app:1.0 brajrajsingh751/demo-aap:1.0'
                     sh 'docker push brajrajsingh751/demo-aap:1.0'
@@ -39,7 +41,7 @@ pipeline {
             }
         }
     }
-    
+
     post {
         success {
             emailext body: 'Your pipeline was successful.',
